@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deactivator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+        *:not(button) {
+            font-family: 'Roboto', sans-serif;
+        }
+        html {
+            height: -webkit-fill-available; /* We have to fix html height */
+            width: 100%;
+            overflow: hidden;
+        }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            width: 100%;
+        }
+        h1 {
+            padding: 0.5rem 0;
+            font-weight: 900;
+            font-size: 3.5rem;
+            text-align: center;
+        }
+        hr {
+            width: 100%;
+        }
+        form {
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 3rem;
+        }
+        form > * {
+            font-size: 1.6rem;
+            display: block;
+        }
+        form > *:not(button) {
+            min-width: 32ch;
+        }
+        form label {
+            margin-bottom: 0.3rem;
+        }
+        form label:not(:first-child) {
+            margin-top: 2rem;
+        }
+        button {
+            margin-top: 1rem;
+            border-radius: 50%;
+            width: fit-content;
+            padding: 1rem;
+            aspect-ratio: 1/1;
+            border: none;
+            color: #fff;
+            font-weight: 900;
+            font-size: 3rem;
+            background: red;
+            text-shadow: 0 3px 1px rgba(122,17,8,.8);
+            box-shadow: 0 8px 0 rgb(183,9,0),0 15px 20px;
+            display: initial;
+            cursor: pointer;
+        }
+        button:active {
+            transform: translateY(10px);
+        }
+        #modal {
+            display: none;
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+        .small {
+            font-size: 0.9rem;
+            margin-top: 1.8rem;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function showLoadIcon() {
+            const modal = document.querySelector("#modal")[0];
+            modal.style.display = "block";
+        }
+    </script>
+    <h1>Deactiveer iemands Smartschool account!</h1>
+    <hr>
+    <form action="{{ url_for('output') }}" method="post">
+        <label for="smartschooladres">Smartschooladres: </label>
+        <input type="text" id="smartschooladres" name="smartschooladres" placeholder="mijnschool.smartschool.be" autocomplete="off">
+        <label for="gebruikersnaam">Gebruikersnaam: </label>
+        <input type="text" id="gebruikersnaam" name="gebruikersnaam" placeholder="mark.eerstift" autocomplete="off">
+        <p class="small">Gelieve na het indrukken een paar seconden te wachten.</p>
+        <button type="submit">Deactiveer</button>
+        <p class="small">Bij het indrukken van deze knop gaat u akkoord met onze <a href="/voorwaarden">voorwaarden</a></p>
+    </form>
+    <div id="modal">
+        <h1>Aan het verwerken...</h1>
+    </div>
+</body>
+</html>
